@@ -64,6 +64,7 @@ function run()
 	const urlParser = new UrlParse(window.location.href, true);
 	let roomId = urlParser.query.roomId;
 	const produce = urlParser.query.produce !== 'false';
+	let displayName = urlParser.query.displayName;
 
 	if (!roomId)
 	{
@@ -85,14 +86,15 @@ function run()
 
 	const roomUrl = roomUrlParser.toString();
 
-	// Get displayName from cookie.
+	// Get displayName from cookie (if not already given as param).
 	const userCookie = cookiesManager.getUser() || {};
-	let displayName;
 	let displayNameSet;
 
-	if (userCookie.displayName)
-	{
+	if (!displayName)
 		displayName = userCookie.displayName;
+
+	if (displayName)
+	{
 		displayNameSet = true;
 	}
 	else
