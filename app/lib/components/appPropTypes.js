@@ -18,7 +18,7 @@ export const Device = PropTypes.shape(
 	{
 		flag    : PropTypes.string.isRequired,
 		name    : PropTypes.string.isRequired,
-		version : PropTypes.string.isRequired
+		version : PropTypes.string
 	});
 
 export const Me = PropTypes.shape(

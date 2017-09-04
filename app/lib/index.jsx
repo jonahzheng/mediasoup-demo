@@ -65,6 +65,7 @@ function run()
 	let roomId = urlParser.query.roomId;
 	const produce = urlParser.query.produce !== 'false';
 	let displayName = urlParser.query.displayName;
+	const isSipEndpoint = urlParser.query.sipEndpoint === 'true';
 
 	if (!roomId)
 	{
@@ -105,6 +106,14 @@ function run()
 
 	// Get current device.
 	const device = getDeviceInfo();
+
+	// If a SIP endpoint mangle device info.
+	if (isSipEndpoint)
+	{
+		device.flag = 'sipendpoint';
+		device.name = 'SIP Endpoint';
+		device.version = undefined;
+	}
 
 	// NOTE: I don't like this.
 	store.dispatch(
