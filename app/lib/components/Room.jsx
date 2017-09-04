@@ -72,11 +72,16 @@ const Room = ({ room, onRoomLinkCopy, onSetAudioMode }) =>
 					:null
 				}
 
-				<ReactTooltip
-					effect='solid'
-					delayShow={100}
-					delayHide={100}
-				/>
+				{/* Unfortunately, if elements with data-tip are rendered later than this one,
+				then they won't be handled by react-tooltip. */}
+				{room.state === 'connected' ?
+					<ReactTooltip
+						effect='solid'
+						delayShow={100}
+						delayHide={100}
+					/>
+					:null
+				}
 			</div>
 		</Appear>
 	);
