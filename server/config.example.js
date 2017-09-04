@@ -12,7 +12,7 @@ module.exports =
 	protoo :
 	{
 		listenIp   : '0.0.0.0',
-		listenPort : 3443
+		listenPort : 3446
 	},
 	mediasoup :
 	{
