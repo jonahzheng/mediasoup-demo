@@ -53,7 +53,16 @@ module.exports =
 				kind      : 'video',
 				name      : 'vp8',
 				clockRate : 90000
-			}
+			},
+			// {
+			// 	kind       : 'video',
+			// 	name       : 'h264',
+			// 	clockRate  : 90000,
+			// 	parameters :
+			// 	{
+			// 		'packetization-mode' : 1
+			// 	}
+			// }
 		],
 		// mediasoup per Peer max sending bitrate (in kpbs).
 		maxBitrate : 500000

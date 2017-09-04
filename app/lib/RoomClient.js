@@ -496,6 +496,18 @@ export default class RoomClient
 					// eslint-disable-next-line no-shadow
 					const { peerName, displayName, oldDisplayName } = request.data;
 
+					// NOTE: Hack, we shouldn't do this, but this is just a demo.
+					const peer = this._room.getPeerByName(peerName);
+
+					if (!peer)
+					{
+						logger.error('peer not found');
+
+						break;
+					}
+
+					peer.appData.displayName = displayName;
+
 					this._dispatch(
 						stateActions.setPeerDisplayName(displayName, peerName));
 
@@ -984,7 +996,7 @@ export default class RoomClient
 			{
 				this._dispatch(requestActions.notify(
 					{
-						text : `${displayName} left the room`
+						text : `${peer.appData.displayName} left the room`
 					}));
 			}
 		});
