@@ -458,8 +458,12 @@ export default class RoomClient
 			{
 				this._room.restartIce();
 
-				this._dispatch(
-					stateActions.setRestartIceInProgress(false));
+				// Make it artificially longer.
+				setTimeout(() =>
+				{
+					this._dispatch(
+						stateActions.setRestartIceInProgress(false));
+				}, 500);
 			})
 			.catch((error) =>
 			{
