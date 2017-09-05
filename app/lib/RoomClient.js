@@ -267,7 +267,13 @@ export default class RoomClient
 			{
 				const track = stream.getVideoTracks()[0];
 
-				return this._webcamProducer.replaceTrack(track);
+				return this._webcamProducer.replaceTrack(track)
+					.then((newTrack) =>
+					{
+						track.stop();
+
+						return newTrack;
+					});
 			})
 			.then((newTrack) =>
 			{
@@ -335,7 +341,13 @@ export default class RoomClient
 			{
 				const track = stream.getVideoTracks()[0];
 
-				return this._webcamProducer.replaceTrack(track);
+				return this._webcamProducer.replaceTrack(track)
+					.then((newTrack) =>
+					{
+						track.stop();
+
+						return newTrack;
+					});
 			})
 			.then((newTrack) =>
 			{
