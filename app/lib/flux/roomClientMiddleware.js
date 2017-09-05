@@ -91,6 +91,13 @@ export default ({ dispatch, getState }) => (next) =>
 
 				break;
 			}
+
+			case 'RESTART_ICE':
+			{
+				client.restartIce();
+
+				break;
+			}
 		}
 
 		return next(action);

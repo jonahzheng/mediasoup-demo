@@ -446,6 +446,30 @@ export default class RoomClient
 			});
 	}
 
+	restartIce()
+	{
+		logger.debug('restartIce()');
+
+		this._dispatch(
+			stateActions.setRestartIceInProgress(true));
+
+		return Promise.resolve()
+			.then(() =>
+			{
+				this._room.restartIce();
+
+				this._dispatch(
+					stateActions.setRestartIceInProgress(false));
+			})
+			.catch((error) =>
+			{
+				logger.error('restartIce() failed: %o', error);
+
+				this._dispatch(
+					stateActions.setRestartIceInProgress(false));
+			});
+	}
+
 	_join({ displayName, device })
 	{
 		this._dispatch(stateActions.setRoomState('connecting'));

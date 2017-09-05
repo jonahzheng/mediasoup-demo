@@ -1,9 +1,10 @@
 const initialState =
 {
-	url                 : null,
-	state               : 'new', // new/connecting/connected/disconnected/closed
-	audioOnly           : false,
-	audioOnlyInProgress : false
+	url                  : null,
+	state                : 'new', // new/connecting/connected/disconnected/closed
+	audioOnly            : false,
+	audioOnlyInProgress  : false,
+	restartIceInProgress : false
 };
 
 const room = (state = initialState, action) =>
@@ -36,6 +37,13 @@ const room = (state = initialState, action) =>
 			const { flag } = action.payload;
 
 			return { ...state, audioOnlyInProgress: flag };
+		}
+
+		case 'SET_RESTART_ICE_IN_PROGRESS':
+		{
+			const { flag } = action.payload;
+
+			return { ...state, restartIceInProgress: flag };
 		}
 
 		default:

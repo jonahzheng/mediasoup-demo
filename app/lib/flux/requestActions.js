@@ -73,6 +73,13 @@ export const disableAudioOnly = () =>
 	};
 };
 
+export const restartIce = () =>
+{
+	return {
+		type : 'RESTART_ICE'
+	};
+};
+
 // This returns a redux-thunk action (a function).
 export const notify = ({ type = 'info', text, timeout }) =>
 {

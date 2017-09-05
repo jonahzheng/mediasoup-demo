@@ -10,8 +10,9 @@ export const Room = PropTypes.shape(
 				'connected',
 				'closed'
 			]).isRequired,
-		audioOnly           : PropTypes.bool.isRequired,
-		audioOnlyInProgress : PropTypes.bool.isRequired
+		audioOnly            : PropTypes.bool.isRequired,
+		audioOnlyInProgress  : PropTypes.bool.isRequired,
+		restartIceInProgress : PropTypes.bool.isRequired
 	});
 
 export const Device = PropTypes.shape(

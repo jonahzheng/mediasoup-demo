@@ -11,7 +11,7 @@ import Me from './Me';
 import Peers from './Peers';
 import Notifications from './Notifications';
 
-const Room = ({ room, onRoomLinkCopy, onSetAudioMode }) =>
+const Room = ({ room, onRoomLinkCopy, onSetAudioMode, onRestartIce }) =>
 {
 	return (
 		<Appear duration={300}>
@@ -59,9 +59,9 @@ const Room = ({ room, onRoomLinkCopy, onSetAudioMode }) =>
 					<Me />
 				</div>
 
-				{room.state === 'connected' ?
+				<div className='sidebar'>
 					<div
-						className={classnames('audio-only-button', {
+						className={classnames('button', 'audio-only', {
 							on       : room.audioOnly,
 							disabled : room.audioOnlyInProgress
 						})}
@@ -69,19 +69,22 @@ const Room = ({ room, onRoomLinkCopy, onSetAudioMode }) =>
 						data-type='dark'
 						onClick={() => onSetAudioMode(!room.audioOnly)}
 					/>
-					:null
-				}
 
-				{/* Unfortunately, if elements with data-tip are rendered later than this one,
-				then they won't be handled by react-tooltip. */}
-				{room.state === 'connected' ?
-					<ReactTooltip
-						effect='solid'
-						delayShow={100}
-						delayHide={100}
+					<div
+						className={classnames('button', 'restart-ice', {
+							disabled : room.restartIceInProgress
+						})}
+						data-tip='Restart ICE'
+						data-type='dark'
+						onClick={() => onRestartIce()}
 					/>
-					:null
-				}
+				</div>
+
+				<ReactTooltip
+					effect='solid'
+					delayShow={100}
+					delayHide={100}
+				/>
 			</div>
 		</Appear>
 	);
@@ -91,7 +94,8 @@ Room.propTypes =
 {
 	room           : appPropTypes.Room.isRequired,
 	onRoomLinkCopy : PropTypes.func.isRequired,
-	onSetAudioMode : PropTypes.func.isRequired
+	onSetAudioMode : PropTypes.func.isRequired,
+	onRestartIce   : PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) =>
@@ -115,6 +119,10 @@ const mapDispatchToProps = (dispatch) =>
 				dispatch(requestActions.enableAudioOnly());
 			else
 				dispatch(requestActions.disableAudioOnly());
+		},
+		onRestartIce : () =>
+		{
+			dispatch(requestActions.restartIce());
 		}
 	};
 };
