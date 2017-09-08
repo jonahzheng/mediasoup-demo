@@ -62,8 +62,8 @@ const Room = ({ room, me, onRoomLinkCopy, onSetAudioMode, onRestartIce }) =>
 				<div className='sidebar'>
 					<div
 						className={classnames('button', 'audio-only', {
-							on       : room.audioOnly,
-							disabled : room.audioOnlyInProgress
+							on       : me.audioOnly,
+							disabled : me.audioOnlyInProgress
 						})}
 						data-tip='Toggle audio only mode'
 						data-type='dark'
@@ -72,7 +72,7 @@ const Room = ({ room, me, onRoomLinkCopy, onSetAudioMode, onRestartIce }) =>
 
 					<div
 						className={classnames('button', 'restart-ice', {
-							disabled : room.restartIceInProgress
+							disabled : me.restartIceInProgress
 						})}
 						data-tip='Restart ICE'
 						data-type='dark'
