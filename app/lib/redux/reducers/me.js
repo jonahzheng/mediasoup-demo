@@ -1,13 +1,16 @@
 const initialState =
 {
-	name             : null,
-	displayName      : null,
-	displayNameSet   : false,
-	device           : null,
-	canSendMic       : false,
-	canSendWebcam    : false,
-	canChangeWebcam  : false,
-	webcamInProgress : false
+	name                 : null,
+	displayName          : null,
+	displayNameSet       : false,
+	device               : null,
+	canSendMic           : false,
+	canSendWebcam        : false,
+	canChangeWebcam      : false,
+	webcamInProgress     : false,
+	audioOnly            : false,
+	audioOnlyInProgress  : false,
+	restartIceInProgress : false
 };
 
 const me = (state = initialState, action) =>
@@ -51,6 +54,27 @@ const me = (state = initialState, action) =>
 				displayName = state.displayName;
 
 			return { ...state, displayName, displayNameSet: true };
+		}
+
+		case 'SET_AUDIO_ONLY_STATE':
+		{
+			const { enabled } = action.payload;
+
+			return { ...state, audioOnly: enabled };
+		}
+
+		case 'SET_AUDIO_ONLY_IN_PROGRESS':
+		{
+			const { flag } = action.payload;
+
+			return { ...state, audioOnlyInProgress: flag };
+		}
+
+		case 'SET_RESTART_ICE_IN_PROGRESS':
+		{
+			const { flag } = action.payload;
+
+			return { ...state, restartIceInProgress: flag };
 		}
 
 		default:

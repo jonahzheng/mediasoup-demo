@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { getDeviceInfo } from 'mediasoup-client';
 import * as appPropTypes from './appPropTypes';
-import * as requestActions from '../flux/requestActions';
+import * as requestActions from '../redux/requestActions';
 import PeerView from './PeerView';
 
 class Me extends React.Component

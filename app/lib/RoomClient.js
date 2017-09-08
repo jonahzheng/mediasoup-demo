@@ -3,8 +3,8 @@ import * as mediasoupClient from 'mediasoup-client';
 import Logger from './Logger';
 import { getProtooUrl } from './urlFactory';
 import * as cookiesManager from './cookiesManager';
-import * as requestActions from './flux/requestActions';
-import * as stateActions from './flux/stateActions';
+import * as requestActions from './redux/requestActions';
+import * as stateActions from './redux/stateActions';
 
 const logger = new Logger('RoomClient');
 
@@ -41,10 +41,10 @@ export default class RoomClient
 		// Whether we should produce.
 		this._produce = produce;
 
-		// Flux store dispatch function.
+		// Redux store dispatch function.
 		this._dispatch = dispatch;
 
-		// Flux store getState function.
+		// Redux store getState function.
 		this._getState = getState;
 
 		// My peer name.
@@ -1100,7 +1100,7 @@ export default class RoomClient
 		if (consumer.supported)
 		{
 			// Pause it if video and we are in audio-only mode.
-			if (consumer.kind === 'video' && this._getState().room.audioOnly)
+			if (consumer.kind === 'video' && this._getState().me.audioOnly)
 				consumer.pause('audio-only-mode');
 
 			consumer.receive(this._recvTransport)

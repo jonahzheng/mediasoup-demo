@@ -4,8 +4,8 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import {
-	applyMiddleware as applyFluxMiddleware,
-	createStore as createFluxStore
+	applyMiddleware as applyReduxMiddleware,
+	createStore as createReduxStore
 } from 'redux';
 import thunk from 'redux-thunk';
 import { createLogger as createReduxLogger } from 'redux-logger';
@@ -15,10 +15,10 @@ import randomName from 'node-random-name';
 import Logger from './Logger';
 import * as utils from './utils';
 import * as cookiesManager from './cookiesManager';
-import * as requestActions from './flux/requestActions';
-import * as stateActions from './flux/stateActions';
-import reducers from './flux/reducers';
-import roomClientMiddleware from './flux/roomClientMiddleware';
+import * as requestActions from './redux/requestActions';
+import * as stateActions from './redux/stateActions';
+import reducers from './redux/reducers';
+import roomClientMiddleware from './redux/roomClientMiddleware';
 import Room from './components/Room';
 
 const logger = new Logger();
@@ -30,7 +30,7 @@ const reduxMiddlewares =
 
 if (process.env.NODE_ENV === 'development')
 {
-	const fluxLogger = createReduxLogger(
+	const reduxLogger = createReduxLogger(
 		{
 			duration  : true,
 			timestamp : false,
@@ -38,13 +38,13 @@ if (process.env.NODE_ENV === 'development')
 			logErrors : true
 		});
 
-	reduxMiddlewares.push(fluxLogger);
+	reduxMiddlewares.push(reduxLogger);
 }
 
-const store = createFluxStore(
+const store = createReduxStore(
 	reducers,
 	undefined,
-	applyFluxMiddleware(...reduxMiddlewares)
+	applyReduxMiddleware(...reduxMiddlewares)
 );
 
 domready(() =>

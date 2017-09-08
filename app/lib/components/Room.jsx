@@ -5,13 +5,13 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import ClipboardButton from 'react-clipboard.js';
 import * as appPropTypes from './appPropTypes';
-import * as requestActions from '../flux/requestActions';
+import * as requestActions from '../redux/requestActions';
 import { Appear } from './transitions';
 import Me from './Me';
 import Peers from './Peers';
 import Notifications from './Notifications';
 
-const Room = ({ room, onRoomLinkCopy, onSetAudioMode, onRestartIce }) =>
+const Room = ({ room, me, onRoomLinkCopy, onSetAudioMode, onRestartIce }) =>
 {
 	return (
 		<Appear duration={300}>
@@ -67,7 +67,7 @@ const Room = ({ room, onRoomLinkCopy, onSetAudioMode, onRestartIce }) =>
 						})}
 						data-tip='Toggle audio only mode'
 						data-type='dark'
-						onClick={() => onSetAudioMode(!room.audioOnly)}
+						onClick={() => onSetAudioMode(!me.audioOnly)}
 					/>
 
 					<div
@@ -93,6 +93,7 @@ const Room = ({ room, onRoomLinkCopy, onSetAudioMode, onRestartIce }) =>
 Room.propTypes =
 {
 	room           : appPropTypes.Room.isRequired,
+	me             : appPropTypes.Me.isRequired,
 	onRoomLinkCopy : PropTypes.func.isRequired,
 	onSetAudioMode : PropTypes.func.isRequired,
 	onRestartIce   : PropTypes.func.isRequired
@@ -100,7 +101,10 @@ Room.propTypes =
 
 const mapStateToProps = (state) =>
 {
-	return { room: state.room };
+	return {
+		room : state.room,
+		me   : state.me
+	};
 };
 
 const mapDispatchToProps = (dispatch) =>

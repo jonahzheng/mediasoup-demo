@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import * as appPropTypes from './appPropTypes';
-import * as stateActions from '../flux/stateActions';
+import * as stateActions from '../redux/stateActions';
 import { Appear } from './transitions';
 
 const Notifications = ({ notifications, onClick }) =>
