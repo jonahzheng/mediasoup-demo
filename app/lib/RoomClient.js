@@ -78,7 +78,7 @@ export default class RoomClient
 		this._webcam =
 		{
 			device     : null,
-			resolution : 'vga'
+			resolution : 'hd'
 		};
 
 		this._join({ displayName, device });
@@ -242,8 +242,8 @@ export default class RoomClient
 					'changeWebcam() | new selected webcam [device:%o]',
 					this._webcam.device);
 
-				// Reset video resolution to VGA.
-				this._webcam.resolution = 'vga';
+				// Reset video resolution to HD.
+				this._webcam.resolution = 'hd';
 			})
 			.then(() =>
 			{
