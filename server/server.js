@@ -63,6 +63,11 @@ mediaServer.on('newroom', (room) =>
 		{
 			global.PRODUCER = producer;
 		});
+
+		peer.on('newconsumer', (consumer) =>
+		{
+			global.CONSUMER = consumer;
+		});
 	});
 });
 
@@ -208,6 +213,7 @@ function openCommandConsole()
 					stdinLog('- pd, peerdump      : execute peer.dump() for the latest created mediasoup Peer');
 					stdinLog('- td, transportdump : execute transport.dump() for the latest created mediasoup Transport');
 					stdinLog('- prd, producerdump : execute producer.dump() for the latest created mediasoup Producer');
+					stdinLog('- cd, consumerdump : execute consumer.dump() for the latest created mediasoup Consumer');
 					stdinLog('- t,  terminal      : open REPL Terminal');
 					stdinLog('');
 					readStdin();
@@ -323,6 +329,30 @@ function openCommandConsole()
 						.catch((error) =>
 						{
 							stdinError(`producer.dump() failed: ${error}`);
+							readStdin();
+						});
+
+					break;
+				}
+
+				case 'cd':
+				case 'consumerdump':
+				{
+					if (!global.CONSUMER)
+					{
+						readStdin();
+						break;
+					}
+
+					global.CONSUMER.dump()
+						.then((data) =>
+						{
+							stdinLog(`consumer.dump() succeeded:\n${JSON.stringify(data, null, '  ')}`);
+							readStdin();
+						})
+						.catch((error) =>
+						{
+							stdinError(`consumer.dump() failed: ${error}`);
 							readStdin();
 						});
 
