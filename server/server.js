@@ -54,6 +54,9 @@ mediaServer.on('newroom', (room) =>
 	{
 		global.PEER = peer;
 
+		if (peer.consumers.length > 0)
+			global.CONSUMER = peer.consumers[peer.consumers.length - 1];
+
 		peer.on('newtransport', (transport) =>
 		{
 			global.TRANSPORT = transport;
