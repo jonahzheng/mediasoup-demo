@@ -743,7 +743,7 @@ export default class RoomClient
 			{
 				const track = stream.getAudioTracks()[0];
 
-				producer = this._room.createProducer(track, { source: 'mic' });
+				producer = this._room.createProducer(track, null, { source: 'mic' });
 
 				// No need to keep original track.
 				track.stop();
@@ -859,7 +859,8 @@ export default class RoomClient
 			{
 				const track = stream.getVideoTracks()[0];
 
-				producer = this._room.createProducer(track, { source: 'webcam' });
+				producer = this._room.createProducer(
+					track, { simulcast: true }, { source: 'webcam' });
 
 				// No need to keep original track.
 				track.stop();
