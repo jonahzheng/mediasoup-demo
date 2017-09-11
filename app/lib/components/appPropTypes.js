@@ -4,12 +4,7 @@ export const Room = PropTypes.shape(
 	{
 		url   : PropTypes.string.isRequired,
 		state : PropTypes.oneOf(
-			[
-				'new',
-				'connecting',
-				'connected',
-				'closed'
-			]).isRequired
+			[ 'new', 'connecting', 'connected', 'closed' ]).isRequired
 	});
 
 export const Device = PropTypes.shape(
@@ -62,6 +57,7 @@ export const Consumer = PropTypes.shape(
 		supported      : PropTypes.bool.isRequired,
 		locallyPaused  : PropTypes.bool.isRequired,
 		remotelyPaused : PropTypes.bool.isRequired,
+		profile        : PropTypes.oneOf([ 'low', 'medium', 'high' ]),
 		track          : PropTypes.any,
 		codec          : PropTypes.string
 	});

@@ -1097,6 +1097,15 @@ export default class RoomClient
 			this._dispatch(stateActions.setConsumerResumed(consumer.id, originator));
 		});
 
+		consumer.on('effectiveprofilechange', (profile) =>
+		{
+			logger.debug(
+				'consumer "effectiveprofilechange" event [id:%s, consumer:%o, profile:%s]',
+				consumer.id, consumer, profile);
+
+			this._dispatch(stateActions.setConsumerEffectiveProfile(consumer.id, profile));
+		});
+
 		// Receive the consumer (if we can).
 		if (consumer.supported)
 		{

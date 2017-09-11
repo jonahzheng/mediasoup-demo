@@ -302,6 +302,12 @@ class Room extends EventEmitter
 			logger.info(
 				'Consumer "resume" event [originator:%s]', originator);
 		});
+
+		consumer.on('effectiveprofilechange', (profile) =>
+		{
+			logger.info(
+				'Consumer "effectiveprofilechange" event [profile:%s]', profile);
+		});
 	}
 
 	_handleMediasoupClientRequest(protooPeer, request, accept, reject)

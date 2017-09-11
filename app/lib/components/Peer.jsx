@@ -23,6 +23,11 @@ const Peer = (props) =>
 		!webcamConsumer.remotelyPaused
 	);
 
+	let videoProfile;
+
+	if (webcamConsumer)
+		videoProfile = webcamConsumer.profile;
+
 	return (
 		<div data-component='Peer'>
 			<div className='indicators'>
@@ -48,6 +53,7 @@ const Peer = (props) =>
 				audioTrack={micConsumer ? micConsumer.track : null}
 				videoTrack={webcamConsumer ? webcamConsumer.track : null}
 				videoVisible={videoVisible}
+				videoProfile={videoProfile}
 				audioCodec={micConsumer ? micConsumer.codec : null}
 				videoCodec={webcamConsumer ? webcamConsumer.codec : null}
 			/>

@@ -174,6 +174,14 @@ export const setConsumerResumed = (consumerId, originator) =>
 	};
 };
 
+export const setConsumerEffectiveProfile = (consumerId, profile) =>
+{
+	return {
+		type    : 'SET_CONSUMER_EFFECTIVE_PROFILE',
+		payload : { consumerId, profile }
+	};
+};
+
 export const setConsumerTrack = (consumerId, track) =>
 {
 	return {

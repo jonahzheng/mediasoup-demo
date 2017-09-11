@@ -64,6 +64,7 @@
       supported      : true,
       locallyPaused  : false,
       remotelyPaused : false,
+      profile        : 'default',
       track          : MediaStreamTrack,
       codec          : 'opus'
     },
@@ -75,6 +76,7 @@
       supported      : false,
       locallyPaused  : false,
       remotelyPaused : true,
+      profile        : 'medium',
       track          : null,
       codec          : 'h264'
     }

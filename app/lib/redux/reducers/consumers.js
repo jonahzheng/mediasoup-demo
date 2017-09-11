@@ -49,6 +49,15 @@ const consumers = (state = initialState, action) =>
 			return { ...state, [consumerId]: newConsumer };
 		}
 
+		case 'SET_CONSUMER_EFFECTIVE_PROFILE':
+		{
+			const { consumerId, profile } = action.payload;
+			const consumer = state[consumerId];
+			const newConsumer = { ...consumer, profile };
+
+			return { ...state, [consumerId]: newConsumer };
+		}
+
 		case 'SET_CONSUMER_TRACK':
 		{
 			const { consumerId, track } = action.payload;

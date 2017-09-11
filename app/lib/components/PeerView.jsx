@@ -40,6 +40,7 @@ export default class PeerView extends React.Component
 			isMe,
 			peer,
 			videoVisible,
+			videoProfile,
 			audioCodec,
 			videoCodec,
 			onChangeDisplayName
@@ -62,7 +63,7 @@ export default class PeerView extends React.Component
 							}
 
 							{videoCodec ?
-								<p className='codec'>{videoCodec}</p>
+								<p className='codec'>{videoCodec} {videoProfile}</p>
 								:null
 							}
 
@@ -243,6 +244,7 @@ PeerView.propTypes =
 	audioTrack          : PropTypes.any,
 	videoTrack          : PropTypes.any,
 	videoVisible        : PropTypes.bool.isRequired,
+	videoProfile        : PropTypes.string,
 	audioCodec          : PropTypes.string,
 	videoCodec          : PropTypes.string,
 	onChangeDisplayName : PropTypes.func
