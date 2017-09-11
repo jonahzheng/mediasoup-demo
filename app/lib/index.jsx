@@ -137,6 +137,20 @@ function run()
 
 // TODO: Debugging stuff.
 
+setInterval(() =>
+{
+	if (!global.CLIENT._room.peers[0])
+	{
+		delete global.CONSUMER;
+
+		return;
+	}
+
+	const peer = global.CLIENT._room.peers[0];
+
+	global.CONSUMER = peer.consumers[peer.consumers.length - 1];
+}, 2000);
+
 global.sendSdp = function()
 {
 	logger.debug('---------- SEND_TRANSPORT LOCAL SDP OFFER:');
