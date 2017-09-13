@@ -15,11 +15,21 @@ export default ({ dispatch, getState }) => (next) =>
 					peerName,
 					displayName,
 					device,
+					useSimulcast,
 					produce
 				} = action.payload;
 
 				client = new RoomClient(
-					{ roomId, peerName, displayName, device, produce, dispatch, getState });
+					{
+						roomId,
+						peerName,
+						displayName,
+						device,
+						useSimulcast,
+						produce,
+						dispatch,
+						getState
+					});
 
 				// TODO: TMP
 				global.CLIENT = client;

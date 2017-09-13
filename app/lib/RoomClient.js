@@ -26,7 +26,8 @@ const VIDEO_CONSTRAINS =
 
 export default class RoomClient
 {
-	constructor({ roomId, peerName, displayName, device, produce, dispatch, getState })
+	constructor(
+		{ roomId, peerName, displayName, device, useSimulcast, produce, dispatch, getState })
 	{
 		logger.debug(
 			'constructor() [roomId:"%s", peerName:"%s", displayName:"%s", device:%s]',
@@ -40,6 +41,9 @@ export default class RoomClient
 
 		// Whether we should produce.
 		this._produce = produce;
+
+		// Whether simulcast should be used.
+		this._useSimulcast = useSimulcast;
 
 		// Redux store dispatch function.
 		this._dispatch = dispatch;
@@ -860,7 +864,7 @@ export default class RoomClient
 				const track = stream.getVideoTracks()[0];
 
 				producer = this._room.createProducer(
-					track, { simulcast: true }, { source: 'webcam' });
+					track, { simulcast: this._useSimulcast }, { source: 'webcam' });
 
 				// No need to keep original track.
 				track.stop();
