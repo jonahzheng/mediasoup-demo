@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import Spinner from 'react-spinner';
 import hark from 'hark';
 import * as appPropTypes from './appPropTypes';
 import EditableInput from './EditableInput';
@@ -111,15 +112,23 @@ export default class PeerView extends React.Component
 					ref='video'
 					className={classnames({
 						hidden  : !videoVisible,
-						'is-me' : isMe
+						'is-me' : isMe,
+						loading : videoProfile === 'none'
 					})}
 					autoPlay
 					muted={isMe}
 				/>
 
-				<div className='volume'>
+				<div className='volume-container'>
 					<div className={classnames('bar', `level${volume}`)} />
 				</div>
+
+				{videoProfile === 'none' ?
+					<div className='spinner-container'>
+						<Spinner />
+					</div>
+					:null
+				}
 			</div>
 		);
 	}

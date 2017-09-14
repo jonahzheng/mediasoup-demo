@@ -81,8 +81,15 @@ function run()
 
 	for (const key of Object.keys(roomUrlParser.query))
 	{
-		if (key !== 'roomId')
-			delete roomUrlParser.query[key];
+		// Don't keep some custom params.
+		switch (key)
+		{
+			case 'roomId':
+			case 'simulcast':
+				break;
+			default:
+				delete roomUrlParser.query[key];
+		}
 	}
 	delete roomUrlParser.hash;
 
