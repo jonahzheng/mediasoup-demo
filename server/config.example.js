@@ -53,7 +53,7 @@ module.exports =
 				kind      : 'video',
 				name      : 'vp8',
 				clockRate : 90000
-			},
+			}
 			// {
 			// 	kind       : 'video',
 			// 	name       : 'h264',

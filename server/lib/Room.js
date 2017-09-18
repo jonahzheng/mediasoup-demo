@@ -111,22 +111,54 @@ class Room extends EventEmitter
 		const activeSpeakerDetector =
 			new mediasoup.plugins.ActiveSpeakerDetector(this._mediaRoom);
 
-		activeSpeakerDetector.on('activespeakerchange', (peer) =>
+		activeSpeakerDetector.on('activespeakerchange', (activePeer) =>
 		{
-			if (peer)
+			if (activePeer)
 			{
-				logger.info('new active speaker [peerName:"%s"]', peer.name);
+				logger.info('new active speaker [peerName:"%s"]', activePeer.name);
+
+				const activeVideoProducer = activePeer.producers
+					.find((producer) => producer.kind === 'video');
+
+				for (const peer of this._mediaRoom.peers)
+				{
+					for (const consumer of peer.consumers)
+					{
+						if (consumer.kind !== 'video')
+							continue;
+
+						if (consumer.source === activeVideoProducer)
+						{
+							consumer.setPreferredProfile('high');
+						}
+						else
+						{
+							consumer.setPreferredProfile('low');
+						}
+					}
+				}
 			}
 			else
 			{
 				logger.info('no active speaker');
+
+				for (const peer of this._mediaRoom.peers)
+				{
+					for (const consumer of peer.consumers)
+					{
+						if (consumer.kind !== 'video')
+							continue;
+
+						consumer.setPreferredProfile('low');
+					}
+				}
 			}
 
 			// Spread to others via protoo.
 			this._protooRoom.spread(
 				'active-speaker',
 				{
-					peerName : peer ? peer.name : null
+					peerName : activePeer ? activePeer.name : null
 				});
 		});
 	}
