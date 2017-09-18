@@ -537,6 +537,8 @@ export default class RoomClient
 
 				case 'active-speaker':
 				{
+					accept();
+
 					const { peerName } = request.data;
 
 					this._dispatch(
@@ -547,6 +549,8 @@ export default class RoomClient
 
 				case 'display-name-changed':
 				{
+					accept();
+
 					// eslint-disable-next-line no-shadow
 					const { peerName, displayName, oldDisplayName } = request.data;
 
