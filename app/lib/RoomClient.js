@@ -535,6 +535,16 @@ export default class RoomClient
 					break;
 				}
 
+				case 'active-speaker':
+				{
+					const { peerName } = request.data;
+
+					this._dispatch(
+						stateActions.setRoomActiveSpeaker(peerName));
+
+					break;
+				}
+
 				case 'display-name-changed':
 				{
 					// eslint-disable-next-line no-shadow

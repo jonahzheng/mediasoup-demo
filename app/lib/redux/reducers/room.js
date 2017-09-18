@@ -22,6 +22,13 @@ const room = (state = initialState, action) =>
 			return { ...state, state: roomState };
 		}
 
+		case 'SET_ROOM_ACTIVE_SPEAKER':
+		{
+			const { peerName } = action.payload;
+
+			return { ...state, activeSpeakerName: peerName };
+		}
+
 		default:
 			return state;
 	}

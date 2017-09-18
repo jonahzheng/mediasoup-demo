@@ -4,22 +4,23 @@
 {
   room :
   {
-    url                  : 'https://example.io/?&roomId=d0el8y34',
-    state                : 'connected', // new/connecting/connected/closed,
-    audioOnly            : false,
-    audioOnlyInProgress  : false,
-    restartIceInProgress : false
+    url               : 'https://example.io/?&roomId=d0el8y34',
+    state             : 'connected' // new/connecting/connected/closed
+    activeSpeakerName : 'alice'
   },
   me :
   {
-    name             : 'bob',
-    displayName      : 'Bob McFLower',
-    displayNameSet   : false, // true if got from cookie or manually set.
-    device           : { flag: 'firefox', name: 'Firefox', version: '61' },
-    canSendMic       : true,
-    canSendWebcam    : true,
-    canChangeWebcam  : false,
-    webcamInProgress : false
+    name                 : 'bob',
+    displayName          : 'Bob McFLower',
+    displayNameSet       : false, // true if got from cookie or manually set.
+    device               : { flag: 'firefox', name: 'Firefox', version: '61' },
+    canSendMic           : true,
+    canSendWebcam        : true,
+    canChangeWebcam      : false,
+    webcamInProgress     : false,
+    audioOnly            : false,
+    audioOnlyInProgress  : false,
+    restartIceInProgress : false
   },
   producers :
   {

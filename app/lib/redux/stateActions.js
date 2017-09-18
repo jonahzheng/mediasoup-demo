@@ -14,6 +14,14 @@ export const setRoomState = (state) =>
 	};
 };
 
+export const setRoomActiveSpeaker = (peerName) =>
+{
+	return {
+		type    : 'SET_ROOM_ACTIVE_SPEAKER',
+		payload : { peerName }
+	};
+};
+
 export const setMe = ({ peerName, displayName, displayNameSet, device }) =>
 {
 	return {

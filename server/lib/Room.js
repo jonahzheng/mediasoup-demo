@@ -2,6 +2,7 @@
 
 const EventEmitter = require('events').EventEmitter;
 const protooServer = require('protoo-server');
+const mediasoup = require('mediasoup');
 const Logger = require('./Logger');
 const config = require('../config');
 
@@ -106,6 +107,28 @@ class Room extends EventEmitter
 	_handleMediaRoom()
 	{
 		logger.debug('_handleMediaRoom()');
+
+		const activeSpeakerDetector =
+			new mediasoup.plugins.ActiveSpeakerDetector(this._mediaRoom);
+
+		activeSpeakerDetector.on('activespeakerchange', (peer) =>
+		{
+			if (peer)
+			{
+				logger.info('new active speaker [peerName:"%s"]', peer.name);
+			}
+			else
+			{
+				logger.info('no active speaker');
+			}
+
+			// Spread to others via protoo.
+			this._protooRoom.spread(
+				'active-speaker',
+				{
+					peerName : peer ? peer.name : null
+				});
+		});
 	}
 
 	_handleProtooPeer(protooPeer)

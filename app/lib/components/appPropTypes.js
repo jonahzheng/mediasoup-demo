@@ -4,7 +4,8 @@ export const Room = PropTypes.shape(
 	{
 		url   : PropTypes.string.isRequired,
 		state : PropTypes.oneOf(
-			[ 'new', 'connecting', 'connected', 'closed' ]).isRequired
+			[ 'new', 'connecting', 'connected', 'closed' ]).isRequired,
+		activeSpeakerName : PropTypes.string
 	});
 
 export const Device = PropTypes.shape(

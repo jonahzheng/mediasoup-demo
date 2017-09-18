@@ -11,7 +11,15 @@ import Me from './Me';
 import Peers from './Peers';
 import Notifications from './Notifications';
 
-const Room = ({ room, me, onRoomLinkCopy, onSetAudioMode, onRestartIce }) =>
+const Room = (
+	{
+		room,
+		me,
+		amActiveSpeaker,
+		onRoomLinkCopy,
+		onSetAudioMode,
+		onRestartIce
+	}) =>
 {
 	return (
 		<Appear duration={300}>
@@ -55,7 +63,11 @@ const Room = ({ room, me, onRoomLinkCopy, onSetAudioMode, onRestartIce }) =>
 
 				<Peers />
 
-				<div className='me-container'>
+				<div
+					className={classnames('me-container', {
+						'active-speaker' : amActiveSpeaker
+					})}
+				>
 					<Me />
 				</div>
 
@@ -92,18 +104,20 @@ const Room = ({ room, me, onRoomLinkCopy, onSetAudioMode, onRestartIce }) =>
 
 Room.propTypes =
 {
-	room           : appPropTypes.Room.isRequired,
-	me             : appPropTypes.Me.isRequired,
-	onRoomLinkCopy : PropTypes.func.isRequired,
-	onSetAudioMode : PropTypes.func.isRequired,
-	onRestartIce   : PropTypes.func.isRequired
+	room            : appPropTypes.Room.isRequired,
+	me              : appPropTypes.Me.isRequired,
+	amActiveSpeaker : PropTypes.bool.isRequired,
+	onRoomLinkCopy  : PropTypes.func.isRequired,
+	onSetAudioMode  : PropTypes.func.isRequired,
+	onRestartIce    : PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) =>
 {
 	return {
-		room : state.room,
-		me   : state.me
+		room            : state.room,
+		me              : state.me,
+		amActiveSpeaker : state.me.name === state.room.activeSpeakerName
 	};
 };
 
