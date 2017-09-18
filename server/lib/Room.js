@@ -45,6 +45,10 @@ class Room extends EventEmitter
 		// Current max bitrate for all the participants.
 		this._maxBitrate = MAX_BITRATE;
 
+		// Current active speaker.
+		// @type {mediasoup.Peer}
+		this._currentActiveSpeaker = null;
+
 		this._handleMediaRoom();
 	}
 
@@ -117,6 +121,8 @@ class Room extends EventEmitter
 			{
 				logger.info('new active speaker [peerName:"%s"]', activePeer.name);
 
+				this._currentActiveSpeaker = activePeer;
+
 				const activeVideoProducer = activePeer.producers
 					.find((producer) => producer.kind === 'video');
 
@@ -141,6 +147,8 @@ class Room extends EventEmitter
 			else
 			{
 				logger.info('no active speaker');
+
+				this._currentActiveSpeaker = null;
 
 				for (const peer of this._mediaRoom.peers)
 				{
@@ -306,6 +314,17 @@ class Room extends EventEmitter
 
 			this._handleMediaConsumer(consumer);
 		}
+
+		// Notify about the existing active speaker.
+		if (this._currentActiveSpeaker)
+		{
+			protooPeer.send(
+				'active-speaker',
+				{
+					peerName : this._currentActiveSpeaker.name
+				})
+				.catch(() => {});
+		}
 	}
 
 	_handleMediaTransport(transport)
@@ -364,8 +383,9 @@ class Room extends EventEmitter
 				'Consumer "effectiveprofilechange" event [profile:%s]', profile);
 		});
 
-		// If video, initially make it 'low' profile.
-		if (consumer.kind === 'video')
+		// If video, initially make it 'low' profile unless this is for the current
+		// active speaker.
+		if (consumer.kind === 'video' && consumer.peer !== this._currentActiveSpeaker)
 			consumer.setPreferredProfile('low');
 	}
 
