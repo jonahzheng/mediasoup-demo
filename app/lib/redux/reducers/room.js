@@ -19,7 +19,10 @@ const room = (state = initialState, action) =>
 		{
 			const roomState = action.payload.state;
 
-			return { ...state, state: roomState };
+			if (roomState == 'connected')
+				return { ...state, state: roomState };
+			else
+				return { ...state, state: roomState, activeSpeakerName: null };
 		}
 
 		case 'SET_ROOM_ACTIVE_SPEAKER':
