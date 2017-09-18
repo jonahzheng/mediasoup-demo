@@ -363,6 +363,10 @@ class Room extends EventEmitter
 			logger.info(
 				'Consumer "effectiveprofilechange" event [profile:%s]', profile);
 		});
+
+		// If video, initially make it 'low' profile.
+		if (consumer.kind === 'video')
+			consumer.setPreferredProfile('low');
 	}
 
 	_handleMediasoupClientRequest(protooPeer, request, accept, reject)
