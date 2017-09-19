@@ -2,7 +2,6 @@
 
 const EventEmitter = require('events').EventEmitter;
 const protooServer = require('protoo-server');
-const mediasoup = require('mediasoup');
 const Logger = require('./Logger');
 const config = require('../config');
 
@@ -112,8 +111,7 @@ class Room extends EventEmitter
 	{
 		logger.debug('_handleMediaRoom()');
 
-		const activeSpeakerDetector =
-			new mediasoup.plugins.ActiveSpeakerDetector(this._mediaRoom);
+		const activeSpeakerDetector = this._mediaRoom.createActiveSpeakerDetector();
 
 		activeSpeakerDetector.on('activespeakerchange', (activePeer) =>
 		{
@@ -355,6 +353,35 @@ class Room extends EventEmitter
 			logger.info(
 				'Producer "resume" event [originator:%s]', originator);
 		});
+
+		// TODO: Testing RtpStreamer.
+		// if (producer.kind === 'audio')
+		// {
+		// 	if (global.rtpStreamer && global.rtpStreamer !== 'tmp')
+		// 	{
+		// 		global.rtpStreamer.close();
+		// 		delete global.rtpStreamer;
+		// 	}
+
+		// 	if (!global.rtpStreamer)
+		// 	{
+		// 		global.rtpStreamer = 'tmp';
+
+		// 		const options =
+		// 		{
+		// 			remoteIP   : '127.0.0.1',
+		// 			remotePort : 1234
+		// 		};
+
+		// 		this._mediaRoom.createRtpStreamer(producer, options)
+		// 			.then((rtpStreamer) =>
+		// 			{
+		// 				logger.info('--- habemus rtpStreamer !!!');
+
+		// 				global.rtpStreamer = rtpStreamer;
+		// 			});
+		// 	}
+		// }
 	}
 
 	_handleMediaConsumer(consumer)
