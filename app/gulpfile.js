@@ -21,6 +21,7 @@ const gutil = require('gulp-util');
 const plumber = require('gulp-plumber');
 const rename = require('gulp-rename');
 const header = require('gulp-header');
+const touch = require('gulp-touch-cmd');
 const browserify = require('browserify');
 const watchify = require('watchify');
 const envify = require('envify/custom');
@@ -155,7 +156,8 @@ gulp.task('css', () =>
 				maxWeightResource : 50000 // So big ttf fonts are not included, nice.
 			}))
 		.pipe(rename(`${PKG.name}.css`))
-		.pipe(gulp.dest(OUTPUT_DIR));
+		.pipe(gulp.dest(OUTPUT_DIR))
+		.pipe(touch());
 });
 
 gulp.task('html', () =>
