@@ -394,7 +394,7 @@ function openTerminal()
 			prompt          : 'terminal> ',
 			useColors       : true,
 			useGlobal       : true,
-			ignoreUndefined : true
+			ignoreUndefined : false
 		});
 
 	terminal.on('exit', () => openCommandConsole());
