@@ -1,7 +1,8 @@
 const initialState =
 {
-	url   : null,
-	state : 'new' // new/connecting/connected/disconnected/closed
+	url               : null,
+	state             : 'new', // new/connecting/connected/disconnected/closed,
+	activeSpeakerName : null
 };
 
 const room = (state = initialState, action) =>
