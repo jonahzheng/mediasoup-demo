@@ -685,7 +685,7 @@ export default class RoomClient
 						if (!this._room.canSend('audio'))
 							return;
 
-						return this._setMicProducer()
+						this._setMicProducer()
 							.catch(() => {});
 					})
 					// Add our webcam (unless the cookie says no).
