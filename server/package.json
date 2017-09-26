@@ -10,6 +10,7 @@
     "colors": "^1.1.2",
     "debug": "^3.0.1",
     "express": "^4.15.4",
+    "mediasoup": "git://github.com/versatica/mediasoup.git#v2",
     "protoo-server": "^2.0.3"
   },
   "devDependencies": {
