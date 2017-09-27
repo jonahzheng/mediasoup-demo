@@ -422,8 +422,10 @@ export default class RoomClient
 			.then(() =>
 			{
 				if (!this._webcamProducer && this._room.canSend('video'))
-					this.enableWebcam();
-
+					return this.enableWebcam();
+			})
+			.then(() =>
+			{
 				for (const peer of this._room.peers)
 				{
 					for (const consumer of peer.consumers)
