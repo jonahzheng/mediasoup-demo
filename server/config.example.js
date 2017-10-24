@@ -60,7 +60,7 @@ module.exports =
 			udp : true,
 			tcp : true
 		},
-		// mediasoup per Peer max sending bitrate (in kpbs).
+		// mediasoup per Peer max sending bitrate (in kbps).
 		maxBitrate : 500000
 	}
 };
